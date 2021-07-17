@@ -8,12 +8,13 @@
     tools:context=".ListActivity">
 
   <Button
-      android:id="@+id/button"
+      android:id="@+id/btnShow"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Button" />
+      android:text="@string/btnShow" />
 
   <ListView
+      android:id="@+id/lv"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
 </LinearLayout>

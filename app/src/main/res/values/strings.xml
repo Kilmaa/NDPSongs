@@ -14,6 +14,7 @@
     <string name="star5">5</string>
     <string name="btnInsert">INSERT</string>
     <string name="btnList">SHOW LIST</string>
+    <string name="btnShow">SHOW ALL SONGS WITH 5 STARS</string>
     <string name="id">ID</string>
     <string name="btnUpdate">UPDATE</string>
     <string name="btnDelete">DELETE</string>

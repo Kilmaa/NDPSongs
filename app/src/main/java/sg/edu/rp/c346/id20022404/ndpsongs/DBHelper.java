@@ -28,13 +28,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_NOTE_CONTENT + " TEXT ) ";
         db.execSQL(sql);
         Log.i("info", "created tables");
-
-        for(int i = 0; i < 4; i++) {
-            ContentValues values = new ContentValues();
-            values.put(COLUMN_NOTE_CONTENT, "Data number " + i);
-            db.insert(TABLE_NOTE, null, values);
-        }
-        Log.i("info", "dummy records inserted");
     }
 
     @Override
@@ -42,18 +35,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("ALTER TABLE " + TABLE_NOTE + " ADD COLUMN module_name TEXT ");
     }
 
-    public long insertNote(String noteContent) {
+    public long insertTask(String noteContent) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOTE_CONTENT, noteContent);
         long result = db.insert(TABLE_NOTE, null, values);
         db.close();
-        Log.d("SQL Insert","ID:"+ result); //id returned, shouldn’t be -1
+        Log.d("SQL Insert","ID:"+ result);
         return result;
     }
 
-    public ArrayList<Note> getAllNotes() {
-        ArrayList<Note> notes = new ArrayList<Note>();
+    public ArrayList<Song> getAllTask() {
+        ArrayList<Song> task = new ArrayList<Song>();
 
         String selectQuery = "SELECT " + COLUMN_ID + ","
                 + COLUMN_NOTE_CONTENT + " FROM " + TABLE_NOTE;
@@ -64,17 +57,17 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 int id = cursor.getInt(0);
                 String noteContent = cursor.getString(1);
-                Note note = new Note(id, noteContent);
-                notes.add(note);
+                Song note = new Song(id, noteContent);
+                task.add(note);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return notes;
+        return task;
     }
 
-    public ArrayList<Note> getAllNotes(String keyword) {
-        ArrayList<Note> notes = new ArrayList<Note>();
+    public ArrayList<Song> getAllTask(String keyword) {
+        ArrayList<Song> notes = new ArrayList<Song>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns= {COLUMN_ID, COLUMN_NOTE_CONTENT};
@@ -87,8 +80,8 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 int id = cursor.getInt(0);
                 String noteContent = cursor.getString(1);
-                Note note = new Note(id, noteContent);
-                notes.add(note);
+                Song task = new Song(id, noteContent);
+                notes.add(task);
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -96,10 +89,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return notes;
     }
 
-    public int updateNote(Note data){
+    public int updateNote(Song data){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NOTE_CONTENT, data.getNoteContent());
+        values.put(COLUMN_NOTE_CONTENT, data.getAllNotes());
         String condition = COLUMN_ID + "= ?";
         String[] args = {String.valueOf(data.getId())};
         int result = db.update(TABLE_NOTE, values, condition, args);
