@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText etTitle, etSingers, etYear;
@@ -25,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = findViewById(R.id.btnInsert);
         btnList = findViewById(R.id.btnList);
         rg = findViewById(R.id.rg);
+
+        btnInsert.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                DBHelper db = new DBHelper(MainActivity.this);
+                db.insertTask(etDescription.getText().toString(), etDate.getText().toString());
+
+            }
+        });
 
         btnList.setOnClickListener(new View.OnClickListener() {
             @Override
