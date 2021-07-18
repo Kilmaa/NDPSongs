@@ -66,20 +66,24 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(EditActivity.this);
 
-                if (etTitle != null || etSingers != null || etYear != null || etRG.getCheckedRadioButtonId() == -1) {
-                    int rating = etRG.getCheckedRadioButtonId();
+                int rating = etRG.getCheckedRadioButtonId();
 
-                    if (etRG.getCheckedRadioButtonId() == R.id.opt1) {
-                        rating = 1;
-                    } else if (etRG.getCheckedRadioButtonId() == R.id.opt2) {
-                        rating = 2;
-                    } else if (etRG.getCheckedRadioButtonId() == R.id.opt3) {
-                        rating = 3;
-                    } else if (etRG.getCheckedRadioButtonId() == R.id.opt4) {
-                        rating = 4;
-                    } else if (etRG.getCheckedRadioButtonId() == R.id.opt5) {
-                        rating = 5;
-                    }
+                if (etRG.getCheckedRadioButtonId() == R.id.opt1) {
+                    rating = 1;
+                } else if (etRG.getCheckedRadioButtonId() == R.id.opt2) {
+                    rating = 2;
+                } else if (etRG.getCheckedRadioButtonId() == R.id.opt3) {
+                    rating = 3;
+                } else if (etRG.getCheckedRadioButtonId() == R.id.opt4) {
+                    rating = 4;
+                } else if (etRG.getCheckedRadioButtonId() == R.id.opt5) {
+                    rating = 5;
+                } else {
+                    rating = 0;
+                }
+
+                if (etTitle.length() != 0 && etSingers.length() != 0 && etYear.length() != 0 && rating != 0) {
+
 
                     data.setTitle(etTitle.getText().toString());
                     data.setSinger(etSingers.getText().toString());

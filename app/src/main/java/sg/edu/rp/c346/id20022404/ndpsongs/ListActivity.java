@@ -28,13 +28,12 @@ public class ListActivity extends AppCompatActivity {
         btnShow = findViewById(R.id.btnShow);
         lv = findViewById(R.id.lv);
 
-        al = new ArrayList<Song>();
-        aa = new ArrayAdapter<Song>(this,android.R.layout.simple_list_item_1, al);
-        lv.setAdapter(aa);
-
         DBHelper dbh = new DBHelper(ListActivity.this);
         al = dbh.getAllSongs();
         dbh.close();
+
+        aa = new ArrayAdapter<Song>(this, android.R.layout.simple_list_item_1, al);
+        lv.setAdapter(aa);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,6 +57,7 @@ public class ListActivity extends AppCompatActivity {
                 aa.notifyDataSetChanged();
             }
         });
+
     }
 
     @Override

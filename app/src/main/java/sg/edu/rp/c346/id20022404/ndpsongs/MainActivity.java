@@ -35,26 +35,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper db = new DBHelper(MainActivity.this);
 
-                if (etTitle != null || etSingers != null || etYear != null || rg.getCheckedRadioButtonId() == -1) {
-                    int rating = rg.getCheckedRadioButtonId();
+                int rating = rg.getCheckedRadioButtonId();
 
-                    if (rg.getCheckedRadioButtonId() == R.id.star1) {
-                        rating = 1;
-                    } else if (rg.getCheckedRadioButtonId() == R.id.star2) {
-                        rating = 2;
-                    } else if (rg.getCheckedRadioButtonId() == R.id.star3) {
-                        rating = 3;
-                    } else if (rg.getCheckedRadioButtonId() == R.id.star4) {
-                        rating = 4;
-                    } else if (rg.getCheckedRadioButtonId() == R.id.star5) {
-                        rating = 5;
-                    }
+                if (rg.getCheckedRadioButtonId() == R.id.star1) {
+                    rating = 1;
+                } else if (rg.getCheckedRadioButtonId() == R.id.star2) {
+                    rating = 2;
+                } else if (rg.getCheckedRadioButtonId() == R.id.star3) {
+                    rating = 3;
+                } else if (rg.getCheckedRadioButtonId() == R.id.star4) {
+                    rating = 4;
+                } else if (rg.getCheckedRadioButtonId() == R.id.star5) {
+                    rating = 5;
+                } else {
+                    rating = 0;
+                }
 
+                if (etTitle.length() != 0 && etSingers.length() != 0 && etYear.length() != 0 && rating != 0) {
                     db.insertTask(etTitle.getText().toString(), etSingers.getText().toString(),
                             etYear.getText().toString(), rating);
-                    Toast.makeText(MainActivity.this, "Inserted successfully", Toast.LENGTH_SHORT).show();
+                    db.close();
+                    Toast.makeText(MainActivity.this, "Inserted successfully", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "Error: Empty field is not allowed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Error: Empty field is not allowed!", Toast.LENGTH_LONG).show();
                 }
             }
         });

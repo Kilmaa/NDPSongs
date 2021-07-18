@@ -1,6 +1,5 @@
 package sg.edu.rp.c346.id20022404.ndpsongs;
 
-
 public class Song {
     private int id;
     private String title;
@@ -55,7 +54,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return "ID:" + id + ", " + title + singer + year + rating;
+        return title + "\n" + singer + " - "+ year + "\n" + (rating*Integer. parseInt("*"));
     }
 
 }
