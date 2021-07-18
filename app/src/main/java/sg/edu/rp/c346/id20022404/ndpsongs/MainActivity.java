@@ -28,19 +28,30 @@ public class MainActivity extends AppCompatActivity {
         btnList = findViewById(R.id.btnList);
         rg = findViewById(R.id.rg);
 
+        if (rg.getCheckedRadioButtonId() == R.id.star1) {
+            int rating = 1;
+        } else if (rg.getCheckedRadioButtonId() == R.id.star2) {
+            int rating = 2;
+        } else if (rg.getCheckedRadioButtonId() == R.id.star3) {
+            int rating = 3;
+        } else if (rg.getCheckedRadioButtonId() == R.id.star4) {
+            int rating = 4;
+        } else if (rg.getCheckedRadioButtonId() == R.id.star5) {
+            int rating = 5;
+        }
+
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = etContent.getText().toString();
-                DBHelper dbh = new DBHelper(MainActivity.this);
-                long inserted_id = dbh.insertNote(data);
+                DBHelper db = new DBHelper(MainActivity.this);
 
-                if (inserted_id != -1){
-                    al.clear();
-                    al.addAll(dbh.getAllNotes());
-                    aa.notifyDataSetChanged();
-                    Toast.makeText(MainActivity.this, "Insert successful",
-                            Toast.LENGTH_SHORT).show();
+                if (etTitle != null || etSingers != null || etYear != null || rg.getCheckedRadioButtonId() == -1) {
+                    int rating = rg.getCheckedRadioButtonId();
+                    db.insertTask(etTitle.getText().toString(), etSingers.getText().toString(),
+                            etYear.getText().toString(), rating);
+                    Toast.makeText(MainActivity.this, "Inserted successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Error: Empty field is not allowed!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -3,30 +3,58 @@ package sg.edu.rp.c346.id20022404.ndpsongs;
 
 public class Song {
     private int id;
-    private String description;
-    private String date;
+    private String title;
+    private String singer;
+    private String year;
+    private int rating;
 
     public Song(int id, String description, String date) {
         this.id = id;
-        this.description = description;
-        this.date = date;
+        this.title = title;
+        this.singer = singer;
+        this.year = year;
+        this.rating = rating;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTitle() {
+        return title;
     }
 
-    public String getDate() {
-        return date;
+    public String getSinger() {
+        return singer;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public String setTitle() {
+        return title;
+    }
+
+    public String setSinger() {
+        return singer;
+    }
+
+    public String setYear() {
+        return year;
+    }
+
+    public int setRating() {
+        return rating;
     }
 
     @Override
     public String toString() {
-        return "ID:" + id + ", " + description + date;
+        return "ID:" + id + ", " + title + singer + year + rating;
     }
 
 }
