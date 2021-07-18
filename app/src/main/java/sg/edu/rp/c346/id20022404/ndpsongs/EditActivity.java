@@ -34,9 +34,9 @@ public class EditActivity extends AppCompatActivity {
         data = (Song) i.getSerializableExtra("id");
 
         etID.setText("ID: " + data.getId());
-        etTitle.setText(data.getNoteContent());
-        etSingers.setText(data.getNoteContent());
-        etYear.setText(data.getNoteContent());
+        etTitle.setText(data.getTitle());
+        etSingers.setText(data.getSinger());
+        etYear.setText(data.getYear());
         if(rg.getCheckedRadioButtonId() == R.id.opt1) {
             rg.check(true);
         }
@@ -46,6 +46,9 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(EditActivity.this);
                 data.setNoteContent(etContent.getText().toString());
+                etTitle.setTitle(data.get());
+                etSingers.setSinger(data.getSinger());
+                etYear.setYear(data.getYear());
                 dbh.updateSong(data);
                 dbh.close();
 

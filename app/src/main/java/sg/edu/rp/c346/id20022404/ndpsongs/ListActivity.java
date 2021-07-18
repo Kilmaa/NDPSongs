@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,18 +43,30 @@ public class ListActivity extends AppCompatActivity {
                 Song id = al.get(position);
                 Intent i = new Intent(ListActivity.this,
                         EditActivity.class);
-                i.putExtra("data", id);
+                i.putExtra("data", (Parcelable) id);
                 startActivity(i);
             }
         });
 
+
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(rating == 5) {
-
-                }
+                DBHelper dbh = new DBHelper(ListActivity.this);
+                al.clear();
+                al.addAll(dbh.getAllSongs(5));
+                aa.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        DBHelper dbh = new DBHelper(ListActivity.this);
+        al.clear();
+        al.addAll(dbh.getAllSongs());
+        aa.notifyDataSetChanged();
     }
 }

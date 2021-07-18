@@ -5,16 +5,17 @@ public class Song {
     private int id;
     private String title;
     private String singer;
-    private String year;
+    private int year;
     private int rating;
 
-    public Song(int id, String description, String date) {
+    public Song(int id, String title, String singer, int year, int rating) {
         this.id = id;
         this.title = title;
         this.singer = singer;
         this.year = year;
         this.rating = rating;
     }
+
 
     public int getId() {
         return id;
@@ -28,7 +29,7 @@ public class Song {
         return singer;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
@@ -44,7 +45,7 @@ public class Song {
         return singer;
     }
 
-    public String setYear() {
+    public int setYear() {
         return year;
     }
 
