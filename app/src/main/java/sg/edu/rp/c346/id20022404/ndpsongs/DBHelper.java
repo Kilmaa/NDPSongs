@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = "CREATE TABLE " + TABLE_SONG + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_TITLE + " TEXT, " + COLUMN_SINGER + " TEXT, "
-                + COLUMN_YEAR + " TEXT, " + COLUMN_RATING + " INTEGER) ";
+                + COLUMN_YEAR + " INTEGER, " + COLUMN_RATING + " INTEGER) ";
         db.execSQL(sql);
         Log.i("info", "created tables");
     }

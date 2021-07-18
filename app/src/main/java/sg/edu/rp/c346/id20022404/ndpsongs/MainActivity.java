@@ -28,17 +28,7 @@ public class MainActivity extends AppCompatActivity {
         btnList = findViewById(R.id.btnList);
         rg = findViewById(R.id.rg);
 
-        if (rg.getCheckedRadioButtonId() == R.id.star1) {
-            int rating = 1;
-        } else if (rg.getCheckedRadioButtonId() == R.id.star2) {
-            int rating = 2;
-        } else if (rg.getCheckedRadioButtonId() == R.id.star3) {
-            int rating = 3;
-        } else if (rg.getCheckedRadioButtonId() == R.id.star4) {
-            int rating = 4;
-        } else if (rg.getCheckedRadioButtonId() == R.id.star5) {
-            int rating = 5;
-        }
+
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +37,19 @@ public class MainActivity extends AppCompatActivity {
 
                 if (etTitle != null || etSingers != null || etYear != null || rg.getCheckedRadioButtonId() == -1) {
                     int rating = rg.getCheckedRadioButtonId();
+
+                    if (rg.getCheckedRadioButtonId() == R.id.star1) {
+                        rating = 1;
+                    } else if (rg.getCheckedRadioButtonId() == R.id.star2) {
+                        rating = 2;
+                    } else if (rg.getCheckedRadioButtonId() == R.id.star3) {
+                        rating = 3;
+                    } else if (rg.getCheckedRadioButtonId() == R.id.star4) {
+                        rating = 4;
+                    } else if (rg.getCheckedRadioButtonId() == R.id.star5) {
+                        rating = 5;
+                    }
+
                     db.insertTask(etTitle.getText().toString(), etSingers.getText().toString(),
                             etYear.getText().toString(), rating);
                     Toast.makeText(MainActivity.this, "Inserted successfully", Toast.LENGTH_SHORT).show();

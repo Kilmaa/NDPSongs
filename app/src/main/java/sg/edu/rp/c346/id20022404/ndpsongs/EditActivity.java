@@ -9,10 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import java.text.BreakIterator;
 
 public class EditActivity extends AppCompatActivity {
     EditText etID, etTitle, etSingers, etYear;
-    RadioGroup rg;
+    RadioGroup etRG;
+    RadioButton etRating, star1, star2, star3, star4, star5;
     Button btnUpdate, btnDelete, btnCancel;
     Song data;
 
@@ -25,32 +29,68 @@ public class EditActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.etTitle2);
         etSingers = findViewById(R.id.etSingers2);
         etYear = findViewById(R.id.etYear);
-        rg = findViewById(R.id.rg2);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
         btnCancel = findViewById(R.id.btnCancel);
 
+        etRG = findViewById(R.id.etRG);
+        etRating = findViewById(etRG.getCheckedRadioButtonId());
+        star1 = findViewById(R.id.opt1);
+        star2 = findViewById(R.id.opt2);
+        star3 = findViewById(R.id.opt3);
+        star4 = findViewById(R.id.opt4);
+        star5 = findViewById(R.id.opt5);
+
         Intent i = getIntent();
         data = (Song) i.getSerializableExtra("id");
 
-        etID.setText("ID: " + data.getId());
+        etID.setText(data.getId());
         etTitle.setText(data.getTitle());
         etSingers.setText(data.getSinger());
         etYear.setText(data.getYear());
-        if(rg.getCheckedRadioButtonId() == R.id.opt1) {
-            rg.check(true);
+
+        if(data.getRating() == 1) {
+            star1.setChecked(true);
+        } else if (data.getRating() == 2) {
+            star2.setChecked(true);
+        } else if (data.getRating() == 3) {
+            star3.setChecked(true);
+        } else if (data.getRating() == 4){
+            star4.setChecked(true);
+        } else {
+            star5.setChecked(true);
         }
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(EditActivity.this);
-                data.setNoteContent(etContent.getText().toString());
-                etTitle.setTitle(data.get());
-                etSingers.setSinger(data.getSinger());
-                etYear.setYear(data.getYear());
-                dbh.updateSong(data);
-                dbh.close();
+
+                if (etTitle != null || etSingers != null || etYear != null || etRG.getCheckedRadioButtonId() == -1) {
+                    int rating = etRG.getCheckedRadioButtonId();
+
+                    if (etRG.getCheckedRadioButtonId() == R.id.opt1) {
+                        rating = 1;
+                    } else if (etRG.getCheckedRadioButtonId() == R.id.opt2) {
+                        rating = 2;
+                    } else if (etRG.getCheckedRadioButtonId() == R.id.opt3) {
+                        rating = 3;
+                    } else if (etRG.getCheckedRadioButtonId() == R.id.opt4) {
+                        rating = 4;
+                    } else if (etRG.getCheckedRadioButtonId() == R.id.opt5) {
+                        rating = 5;
+                    }
+
+                    data.setTitle(etTitle.getText().toString());
+                    data.setSinger(etSingers.getText().toString());
+                    data.setYear(Integer.parseInt(etYear.getText().toString()));
+                    data.setRating(rating);
+                    dbh.updateSong(data);
+                    dbh.close();
+                    Toast.makeText(EditActivity.this, "Updated successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(EditActivity.this, "Error: Empty field is not allowed!", Toast.LENGTH_SHORT).show();
+                }
 
                 finish();
             }

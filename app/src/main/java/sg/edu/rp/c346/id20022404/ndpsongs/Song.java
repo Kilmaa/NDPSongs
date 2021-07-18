@@ -37,20 +37,20 @@ public class Song {
         return rating;
     }
 
-    public String setTitle() {
-        return title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String setSinger() {
-        return singer;
+    public void setSinger(String singer) {
+        this.singer = singer;
     }
 
-    public int setYear() {
-        return year;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-    public int setRating() {
-        return rating;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     @Override
